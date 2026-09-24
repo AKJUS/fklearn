@@ -6,6 +6,9 @@
 ![Tests](https://github.com/nubank/fklearn/actions/workflows/push.yaml/badge.svg?branch=master)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
+> **Maintenance notice:** fklearn is deprecated, and support is limited. The
+> library is chapter-owned; no specific team maintains it.
+
 **fklearn** uses functional programming principles to make it easier to solve real problems with Machine Learning.
 
 The name is a reference to the widely known [scikit-learn](https://scikit-learn.org/stable/) library.
@@ -67,6 +70,7 @@ uv run pytest --cov=src/
 ### Linting
 ```bash
 uv run ruff check src/ tests/
+uv run ruff format --check src/ tests/
 uv run ruff format src/ tests/
 ```
 
@@ -81,8 +85,12 @@ uv add --dev <package-name>    # dev dependency
 Regenerate the lockfile with `--default-index https://pypi.org/simple/`:
 
 ```bash
-uv lock --default-index https://pypi.org/simple/
+uv lock --no-config --default-index https://pypi.org/simple/
 ```
+
+`--no-config` excludes local index settings such as Nubank's internal registry.
+Before committing the lockfile, check that package source URLs point to public
+PyPI and contain no credentials.
 
 ## License
 
